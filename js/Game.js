@@ -93,6 +93,10 @@ class Game {
           this.handleFuel(index);
           this.handlePowerCoins(index);
 
+          //Agregar la camara
+          camera.position.x = cars[index-1].position.x; 
+          camera.position.y = cars[index-1].position.y;
+
         }
       }
 
@@ -110,8 +114,8 @@ class Game {
     // Agregando combustible
     cars[index - 1].overlap(fuels, function(collector, collected) {
       player.fuel = 185;
-      // "collected" es el sprite en el grupo de coleccionables que detona
-      // el evento
+      // "collected" es el sprite en el grupo de coleccionables que detona el evento
+    
       collected.remove();
     });
   }
@@ -121,8 +125,7 @@ class Game {
     cars[index - 1].overlap(powerCoins, function(collector, collected) {
       player.score += 21;
       player.update();
-      //"collected" es el sprite en el grupo de coleccionables que detona
-      // el evento
+      //"collected" es el sprite en el grupo de coleccionables que detona el evento
       collected.remove();
     });
   }
