@@ -1,5 +1,9 @@
 class Game {
-  constructor() {}
+  constructor(){
+    this.resetTitle = createElement("h2"); 
+    this.resetButton = createButton("");
+
+  }
 
   getState() {
     var gameStateRef = database.ref("gameState");
@@ -61,10 +65,30 @@ class Game {
     form.hide();
     form.titleImg.position(40, 50);
     form.titleImg.class("gameTitleAfterEffect");
+
+
+    this.resetTitle.html('Reiniciar Juego'); 
+    this.resetTitle.class('resetText'); 
+    this.resetTitle.position(width/2+200, 40); 
+
+    this.resetButton.class('resetButton'); 
+    this.resetButton.position(width/2+200, 100); 
+  }
+
+  handleResetButton(){
+    this.resetButton.mousePressed(()=>{
+      database.ref("/").set({
+        playerCount:0, 
+        gameState: 0, 
+        players: {}
+      }); 
+    window.location.reload();    
+    })
   }
 
   play() {
     this.handleElements();
+    this.handleResetButton(); 
 
     Player.getPlayersInfo();
 
